@@ -1,20 +1,24 @@
-#include <iostream>
-
 #include "set.hpp"
+
+#include <cstdlib>
 #include <iomanip>
+#include <iostream>
 #include <set>
 #include <string>
-#include <cstdlib>
 
-std::string get_yes_no(bool condition)
+namespace
 {
-    return condition ? "YES" : "NO";
-}
+    std::string get_yes_no(bool condition)
+    {
+        return condition ? "YES" : "NO";
+    }
 
-int get_random_int(int rand_max)
-{
-    return static_cast<int>(std::rand() * (static_cast<double>(rand_max) / RAND_MAX));
-}
+    int get_random_int(int rand_max)
+    {
+        return static_cast<int>(std::rand() * (static_cast<double>(rand_max) / RAND_MAX));
+    }
+
+} // unnamed namespace
 
 // Tests addition of new elements and tests whether the tree
 // properly checks for duplicates.
@@ -91,7 +95,7 @@ void test1(unsigned int sample_size, unsigned int random_range, bool verbose = t
     std::cout << "Total test1 result: " << get_yes_no(total_test_result) << std::endl;
 }
 
-int main(int argc, char** argv)
+int main_tests(int argc, char** argv)
 {
     test0(10000, 1000, false);
     test1(10000, 20000, false);

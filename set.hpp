@@ -4,6 +4,7 @@
 #include "rbt.hpp"
 
 #include <exception>
+#include <stdexcept>
 
 namespace sg
 {
@@ -12,6 +13,8 @@ namespace sg
     {
     public:
         set();
+        set(const sg::set<Tvalue>& obj);
+        set(sg::set<Tvalue>&& obj);
         ~set();
 
         class iterator
@@ -42,6 +45,8 @@ namespace sg
         sg::set<Tvalue>::iterator begin();
         sg::set<Tvalue>::iterator end();
 
+        unsigned int size();
+
     private:
         sg::rbt_t<Tvalue>* __tree;
     };
@@ -58,9 +63,25 @@ sg::set<Tvalue>::set()
 
 template <typename Tvalue>
 inline
+sg::set<Tvalue>::set(const sg::set<Tvalue>& obj)
+{
+    __tree = new sg::rbt_t<Tvalue>{*(obj.__tree)};
+}
+
+template <typename Tvalue>
+inline
+sg::set<Tvalue>::set(sg::set<Tvalue>&& obj)
+{
+    __tree = obj.__tree;
+    obj.__tree = nullptr;
+}
+
+template <typename Tvalue>
+inline
 sg::set<Tvalue>::~set()
 {
-    delete __tree;
+    if(__tree)
+        delete __tree;
 }
 
 template <typename Tvalue>
@@ -180,5 +201,11 @@ sg::set<Tvalue>::end()
     return sg::set<Tvalue>::iterator{nullptr, __tree};
 }
 
+template <typename Tvalue>
+inline unsigned int
+sg::set<Tvalue>::size()
+{
+    return __tree->size();
+}
 
 #endif // __SET_HPP__

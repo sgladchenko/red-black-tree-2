@@ -1,0 +1,15 @@
+With rebalancing:
+Number of elements: 100; Average search time: 2.687e-05 ms
+Number of elements: 1000; Average search time: 3.75e-05 ms
+Number of elements: 10000; Average search time: 4.876e-05 ms
+Number of elements: 99956; Average search time: 6.05e-05 ms
+Number of elements: 995059; Average search time: 7.364e-05 ms
+Number of elements: 9515461; Average search time: 9.907e-05 ms
+
+Without rebalancing:
+Number of elements: 100; Average search time: 3.034e-05 ms
+Number of elements: 1000; Average search time: 4.284e-05 ms
+Number of elements: 10000; Average search time: 5.78e-05 ms
+Number of elements: 99943; Average search time: 6.857e-05 ms
+Number of elements: 994929; Average search time: 8.201e-05 ms
+Number of elements: 9514866; Average search time: 0.00010769 ms

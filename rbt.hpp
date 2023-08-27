@@ -40,6 +40,8 @@ namespace sg
     {
     public:
         rbt_t() = default;
+        rbt_t(const sg::rbt_t<Tvalue>& obj);
+        rbt_t(sg::rbt_t<Tvalue>&& obj);
         virtual ~rbt_t();
 
         sg::node_t<Tvalue>* search(const Tvalue& value);
@@ -51,6 +53,8 @@ namespace sg
 #ifdef SG_TODO
         void remove(sg::node_t<Tvalue>* node);
 #endif
+
+        unsigned int size();
 
     protected:
         sg::color_t color(sg::node_t<Tvalue>* node);
@@ -120,6 +124,26 @@ inline sg::color_t
 sg::node_t<Tvalue>::color()
 {
     return __color;
+}
+
+template <typename Tvalue>
+inline
+sg::rbt_t<Tvalue>::rbt_t(const sg::rbt_t<Tvalue>& obj)
+{
+    // TODO: It has to copy every single item in the tree
+    // TODO: one by one, re-creating the data structure.
+    __size = obj.__size;
+}
+
+template <typename Tvalue>
+inline
+sg::rbt_t<Tvalue>::rbt_t(sg::rbt_t<Tvalue>&& obj)
+{
+    __root = obj.__root;
+    __size = obj.__size;
+
+    obj.__root = nullptr;
+    obj.__size = 0;
 }
 
 template <typename Tvalue>
@@ -371,6 +395,13 @@ sg::rbt_t<Tvalue>::insert(const Tvalue& value)
         insert_rebalance(inserted);
 
     return inserted;
+}
+
+template <typename Tvalue>
+inline unsigned int
+sg::rbt_t<Tvalue>::size()
+{
+    return __size;
 }
 
 template <typename Tvalue>
